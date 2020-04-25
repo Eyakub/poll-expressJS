@@ -36,3 +36,48 @@ exports.getAllPolls = async (req, res, next) => {
     console.log(e)
   }
 }
+
+exports.viewPollGetController = async (req, res, next) => {
+  let id = req.params.id
+
+  try{
+    let poll = await Poll.findById(id)
+    let options = [...poll.options]
+
+    let result = []
+    options.forEach(option => {
+      let percentage = (option.vote * 100) / poll.totalVote
+      result.push({
+        // dont understand the ._doc
+        ...option._doc,
+        percentage: percentage ? percentage : 0
+      })
+    })
+    res.render('viewPoll', {poll, result})
+  } catch(e){
+    console.log(e)
+  }
+}
+
+exports.viewPollPostController = async (req, res, next) => {
+  let id = req.params.id
+  let optionId = req.body.option
+  try{
+    let poll = await Poll.findById(id)
+    let options = [...poll.options]
+
+    let index = options.findIndex(option => option.id === optionId)
+    options[index].vote = options[index].vote + 1
+
+    let totalVote = poll.totalVote + 1
+
+    await Poll.findOneAndUpdate(
+      { _id: poll._id },
+      {$set: {options, totalVote}}
+    )
+
+    res.redirect('/polls/' + id)
+  } catch (e){
+    console.log(e)
+  }
+}

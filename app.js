@@ -13,7 +13,7 @@ app.use(morgan('dev'))
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
-// route handle
+// Route handle
 app.get('/', (req, res) => {
   res.render('home')
 })
@@ -21,7 +21,10 @@ app.get('/', (req, res) => {
 app.get('/create', pollController.createPollGetController)
 app.post('/create', pollController.createPollPostController)
 app.get('/polls', pollController.getAllPolls)
+app.get('/polls/:id', pollController.viewPollGetController)
+app.post('/polls/:id', pollController.viewPollPostController)
 
+// database connection
 mongoose.connect('mongodb://localhost:27017/express-cc', {useNewUrlParser: true})
 .then(()=> {
   app.listen(4545, ()=> {
