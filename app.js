@@ -20,7 +20,7 @@ app.get('/', (req, res) => {
 
 app.get('/create', pollController.createPollGetController)
 app.post('/create', pollController.createPollPostController)
-
+app.get('/polls', pollController.getAllPolls)
 
 mongoose.connect('mongodb://localhost:27017/express-cc', {useNewUrlParser: true})
 .then(()=> {
