@@ -9,7 +9,7 @@ const app = express()
 app.set('view engine', 'ejs')
 
 // for middleware purpose
-app.use(morgan('dev'))
+app.use(morgan('dev'))  // in console log we can see the Route moving by this
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
