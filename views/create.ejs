@@ -21,7 +21,8 @@
           <form action="/create" method="POST">
             <div class="form-group">
               <label for="title">Enter title</label>
-              <input type="text" name='title' id='title' class="form-control">
+              <input type="text" name='title' id='title' 
+                class="form-control <%= error.title ? 'is-invalid': '' %>">
             </div>
 
             <div class="form-group">
@@ -36,7 +37,7 @@
               </div>
               <div class="form-group">
                 <input type="text" name='options' class="form-control" placeholder="Option 2">
-              </div>  
+              </div>
             </div>
             <button class="btn btn-secondary btn-sm" id='addOption'>Add More Options</button>
 
@@ -67,13 +68,13 @@
 
     let currentOptionNumber = 3
 
-    addOption.addEventListener('click', function(e){
+    addOption.addEventListener('click', function (e) {
       e.preventDefault()
       let option = createNewOption()
       options.appendChild(option)
     })
 
-    function createNewOption(){
+    function createNewOption() {
       let div = document.createElement('div')
       div.className = 'form-group'
 

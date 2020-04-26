@@ -7,6 +7,31 @@ exports.createPollGetController = (req, res, next) => {
 exports.createPollPostController = async (req, res, next) => {
   let { title, description, options } = req.body
   console.log(req.body)
+  // let error = {}
+  // if(!title){
+  //   error.tite = 'Please provide a title'
+  // }
+  // if(!description){
+  //   error.description = 'Please provide a description'
+  // }
+  // // if(options.length < 2){
+  // //   error.options = 'You have to set at least two options'
+  // // }
+
+  // let isError = Object.keys(error).length > 0
+  // console.log(error, isError)
+  // if(isError){
+  //   Poll.find().then(polls => {
+  //     res.render('create', {polls, error})
+  //   })
+  //   .catch(e => {
+  //     console.log(e)
+  //     res.json({
+  //       message: 'Error Occured'
+  //     })
+  //   })
+  // }
+
   options = options.map(option => {
     return {
       name: option,

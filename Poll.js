@@ -11,6 +11,8 @@ const pollSchema = new Schema({
     type: String,
     required: true,
     trim: true,
+    // maxlength: 99,
+    // minlength: 10
   },
   totalVote: {
     type: Number,
